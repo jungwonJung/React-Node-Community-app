@@ -30,7 +30,7 @@ const Login = () => {
       );
       // after successed SignIn save this user data in Context
       dispatch("SIGNIN", res.data?.user);
-      // after successed SignIn move to "/"
+      // after successed SignIn move to home
       router.push("/");
     } catch (error: any) {
       console.log("error :", error);
