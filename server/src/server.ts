@@ -21,6 +21,7 @@ app.use(
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
+app.use(express.static("public"));
 app.get("/", (_, res) => res.send("running"));
 app.use("/api/auth", authRoutes);
 app.use("/api/subs", subRoutes);

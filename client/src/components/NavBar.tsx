@@ -42,7 +42,7 @@ const NavBar: React.FC = () => {
           (authenticated ? (
             <button
               onClick={handleSignOut}
-              className="uppercase w-20 p-2 mr-2 mt-2 text-center text-white bg-gray-400 rounded"
+              className="uppercase w-24 p-1 mr-2 text-center text-white bg-gray-400 rounded"
             >
               SIGN OUT
             </button>
