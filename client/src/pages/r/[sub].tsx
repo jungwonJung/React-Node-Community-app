@@ -33,8 +33,6 @@ const SubPage = () => {
     fetcher
   );
 
-  console.log(sub);
-
   useEffect(() => {
     if (!sub || !user) return;
     setOwnSub(authenticated && user.username === sub.username);
@@ -118,9 +116,7 @@ const SubPage = () => {
                   <div className="flex items-center">
                     <h1 className=" text-3xl font-bold">{sub.title}</h1>
                   </div>
-                  <p className="text-sm font-bold text-gray-400">
-                    /r/{sub.name}
-                  </p>
+                  <p className="text-sm font-bold text-gray-400">{sub.name}</p>
                 </div>
               </div>
             </div>
