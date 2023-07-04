@@ -1,5 +1,6 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { User } from "../types";
+import Axios from "axios";
 
 interface State {
   user: User | undefined;
@@ -55,6 +56,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = (type: string, payload?: any) => {
     defaultDispatch({ type, payload });
   };
+
+  useEffect(() => {
+    async function loadUser() {
+      // check user already login and has cookie and token
+      try {
+        const res = await Axios.get("/auth/me");
+        dispatch("SIGNIN", res.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        dispatch("STOP_LOADING");
+      }
+    }
+    loadUser();
+  }, []);
 
   return (
     <DispatchContext.Provider value={dispatch}>

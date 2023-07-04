@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
-import InputGroup from "../../components/inputGroup";
+import InputGroup from "../../components/InputGroup";
 import React, { FormEvent, useState } from "react";
 import Axios from "axios";
+import { GetServerSideProps } from "next";
 
 const SubCreate = () => {
   const [name, setName] = useState("");
@@ -78,3 +79,23 @@ const SubCreate = () => {
 };
 
 export default SubCreate;
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  try {
+    const cookie = req.headers.cookie;
+    // if dont have cookies return error
+    if (!cookie) throw new Error("Missing Auth Token Cookie");
+
+    // if have cookie with this cookie sent to backend side and validate
+    await Axios.get("/auth/me", { headers: { cookie } });
+
+    return { props: {} };
+  } catch (error) {
+    // If an error occurs during authentication using the cookie provided in the backend request
+    //redirect to the /login page
+
+    //307 = Temporary redirect error
+    res.writeHead(307, { Location: "/login" }).end();
+    return { props: {} };
+  }
+};
