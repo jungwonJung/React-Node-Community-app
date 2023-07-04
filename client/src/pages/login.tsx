@@ -18,16 +18,10 @@ const Login = () => {
     // blocked refresh pages
 
     try {
-      const res = await axios.post(
-        "/auth/login",
-        {
-          username,
-          password,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post("/auth/login", {
+        username,
+        password,
+      });
       // after successed SignIn save this user data in Context
       dispatch("SIGNIN", res.data?.user);
       // after successed SignIn move to home
