@@ -16,7 +16,8 @@ import Axios from "axios";
 
 interface PostCardProps {
   post: Post;
-  subMutate: () => void;
+  subMutate?: () => void;
+  mutate?: () => void;
 }
 
 const PostCards = ({
@@ -34,6 +35,7 @@ const PostCards = ({
     username,
     sub,
   },
+  mutate,
   subMutate,
 }: PostCardProps) => {
   const { authenticated } = useAuthState();
@@ -53,6 +55,7 @@ const PostCards = ({
       if (subMutate) {
         subMutate();
       }
+      if (mutate) mutate();
     } catch (error) {
       console.log(error);
     }
