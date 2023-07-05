@@ -12,9 +12,24 @@ import { unlinkSync } from "fs";
 import path from "path";
 
 const getSub = async (req: Request, res: Response) => {
-  const name = req.params.body;
+  const name = req.params.name;
   try {
     const sub = await Sub.findOneByOrFail({ name });
+
+    //after created post ,add created post to main sub-community
+    const post = await Post.find({
+      where: { subName: sub.name },
+      order: { createdAt: "DESC" },
+      relations: ["comments", "votes"],
+    });
+
+    sub.posts = post;
+    if (res.locals.user) {
+      sub.posts.forEach((p) => {
+        p.setUserVote(res.locals.user);
+      });
+    }
+
     return res.json(sub);
   } catch (error) {
     return res.status(404).json({ error: "Cannot Find Sub-Community" });

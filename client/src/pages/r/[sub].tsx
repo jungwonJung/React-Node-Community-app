@@ -1,3 +1,4 @@
+import SideBar from "@/src/components/Sidebar";
 import { useAuthState } from "@/src/context/auth";
 import Axios from "axios";
 import { headers } from "next/dist/client/components/headers";
@@ -83,7 +84,7 @@ const SubPage = () => {
                 <div
                   className="h-56"
                   style={{
-                    backgroundImage: `ur;(${sub.bannerUrl})`,
+                    backgroundImage: `url(${sub.bannerUrl})`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
@@ -122,7 +123,10 @@ const SubPage = () => {
             </div>
           </div>
           {/* post with sidebar */}
-          <div className="flex max-w-5xl px-4 pt-5 mx-auto"></div>
+          <div className="flex max-w-5xl px-4 pt-5 mx-auto">
+            <div className="w-full md:mr-3 md:w-8/12"></div>
+            <SideBar sub={sub} />
+          </div>
         </Fragment>
       )}
     </Fragment>
