@@ -1,5 +1,7 @@
+import PostCards from "@/src/components/PostCards";
 import SideBar from "@/src/components/Sidebar";
 import { useAuthState } from "@/src/context/auth";
+import { Post } from "@/src/types";
 import Axios from "axios";
 import { headers } from "next/dist/client/components/headers";
 import Image from "next/image";
@@ -29,10 +31,11 @@ const SubPage = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const subName = router.query.sub;
-  const { data: sub, error } = useSWR(
-    subName ? `/subs/${subName}` : null,
-    fetcher
-  );
+  const {
+    data: sub,
+    error,
+    mutate,
+  } = useSWR(subName ? `/subs/${subName}` : null, fetcher);
 
   useEffect(() => {
     if (!sub || !user) return;
@@ -53,6 +56,7 @@ const SubPage = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+      mutate();
     } catch (error) {
       console.log(error);
     }
@@ -66,6 +70,21 @@ const SubPage = () => {
       fileInput.click();
     }
   };
+
+  let renderPosts;
+  if (!sub) {
+    renderPosts = (
+      <p className="text-lg text-center">Don't have any Post yet</p>
+    );
+  } else if (sub.posts.length === 0) {
+    renderPosts = (
+      <p className="text-lg text-center">Don't have any Post yet</p>
+    );
+  } else {
+    renderPosts = sub.posts.map((post: Post) => (
+      <PostCards key={post.identifier} post={post} subMutate={mutate} />
+    ));
+  }
 
   return (
     <Fragment>
@@ -124,7 +143,7 @@ const SubPage = () => {
           </div>
           {/* post with sidebar */}
           <div className="flex max-w-5xl px-4 pt-5 mx-auto">
-            <div className="w-full md:mr-3 md:w-8/12"></div>
+            <div className="w-full md:mr-3 md:w-8/12">{renderPosts}</div>
             <SideBar sub={sub} />
           </div>
         </Fragment>

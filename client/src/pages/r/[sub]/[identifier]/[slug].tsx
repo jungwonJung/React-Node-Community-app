@@ -1,4 +1,4 @@
-import { Post } from "@/src/types";
+import { Comment, Post } from "@/src/types";
 import Axios from "axios";
 import dayjs from "dayjs";
 import Link from "next/link";
@@ -6,8 +6,13 @@ import { useRouter } from "next/router";
 import React, { FormEvent, Fragment, useState } from "react";
 import useSWR from "swr";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCommentAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCommentAlt,
+  faArrowUp,
+  faArrowDown,
+} from "@fortawesome/free-solid-svg-icons";
 import { useAuthState } from "@/src/context/auth";
+import classNames from "classnames";
 
 const PostPage = () => {
   const router = useRouter();
@@ -24,8 +29,17 @@ const PostPage = () => {
     }
   };
 
-  const { data: post, error } = useSWR<Post>(
+  const {
+    data: post,
+    error,
+    mutate: postMutate,
+  } = useSWR<Post>(
     identifier && slug ? `/posts/${identifier}/${slug}` : null,
+    fetcher
+  );
+
+  const { data: comments, mutate: commentsMutate } = useSWR<Comment[]>(
+    identifier && slug ? `/posts/${identifier}/${slug}/comments` : null,
     fetcher
   );
 
@@ -38,7 +52,33 @@ const PostPage = () => {
         body: newComment,
       });
 
+      commentsMutate();
       setNewcomment("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const vote = async (value: number, comment?: Comment) => {
+    // if not SignIn status push to SingIn page
+    if (!authenticated) router.push("/login");
+
+    // if pressed liked or hate again reset this value
+    if (
+      (!comment && value === post?.userVote) ||
+      (comment && comment.userVote === value)
+    )
+      value = 0;
+
+    try {
+      await Axios.post("/votes", {
+        identifier,
+        slug,
+        commentIdentifier: comment?.identifier,
+        value,
+      });
+      postMutate();
+      commentsMutate();
     } catch (error) {
       console.log(error);
     }
@@ -51,6 +91,34 @@ const PostPage = () => {
           {post && (
             <Fragment>
               <div className="flex">
+                {/* liked part */}
+                <div className="flex-shring-0 w-10 py-2 text-center rounded-l">
+                  <div
+                    className="w-6 mx-auto text-gray-400 rounded cursor-pointer hover:bg-gray-300 hover:text-red-500"
+                    onClick={() => vote(1)}
+                  >
+                    <i
+                      className={classNames({
+                        "text-red-500": post.userVote === 1,
+                      })}
+                    >
+                      <FontAwesomeIcon icon={faArrowUp} />
+                    </i>
+                  </div>
+                  <p className="text-xs font-bold">{post.voteScore}</p>
+                  <div
+                    className="w-6 mx-auto text-gray-400 rounded cursor-pointer hover:bg-gray-300 hover:text-blue-500"
+                    onClick={() => vote(-1)}
+                  >
+                    <i
+                      className={classNames({
+                        "text-blue-500": post.userVote === -1,
+                      })}
+                    >
+                      <FontAwesomeIcon icon={faArrowDown} />
+                    </i>
+                  </div>
+                </div>
                 <div className="py-2 pr-2 ">
                   <div className="flex items-center">
                     <p className="text-xs text-gray-400">
@@ -90,7 +158,7 @@ const PostPage = () => {
                             {user?.username}
                           </a>
                         </Link>{" "}
-                        Post a Comment
+                        Points a Comment
                       </p>
                       <form onClick={submitComment}>
                         <textarea
@@ -124,6 +192,55 @@ const PostPage = () => {
                   )}
                 </div>
               </div>
+              {/* Comments List Container */}
+              {comments?.map((comment) => (
+                <div className="flex" key={comment.identifier}>
+                  <div className="flex-shring-0 w-10 py-2 text-center rounded-l">
+                    <div
+                      className="w-6 mx-auto text-gray-400 rounded cursor-pointer hover:bg-gray-300 hover:text-red-500"
+                      onClick={() => vote(1, comment)}
+                    >
+                      <i
+                        className={classNames({
+                          "text-red-500": comment.userVote === 1,
+                        })}
+                      >
+                        <FontAwesomeIcon icon={faArrowUp} />
+                      </i>
+                    </div>
+                    <p className="text-xs font-bold">{comment.voteScore}</p>
+                    <div
+                      className="w-6 mx-auto text-gray-400 rounded cursor-pointer hover:bg-gray-300 hover:text-blue-500"
+                      onClick={() => vote(-1, comment)}
+                    >
+                      <i
+                        className={classNames({
+                          "text-blue-500": comment.userVote === -1,
+                        })}
+                      >
+                        <FontAwesomeIcon icon={faArrowDown} />
+                      </i>
+                    </div>
+                  </div>
+                  <div className="py-2 pr-2">
+                    <p className="mb-1 text-xs leading-none">
+                      <Link href={`/u/${comment.username}`} legacyBehavior>
+                        <a className="mr-1 font-bold hover:underline">
+                          {comment.username}
+                        </a>
+                      </Link>
+                      <span className="text-gray-600">
+                        {`
+                        ${comment.voteScore}
+                        posts
+                        ${dayjs(comment.createdAt).format("YYYY-MM-DD HH:mm")}
+                        `}
+                      </span>
+                    </p>
+                    <p>{comment.body}</p>
+                  </div>
+                </div>
+              ))}
             </Fragment>
           )}
         </div>

@@ -41,7 +41,6 @@ export default class Comment extends BaseEntity {
   votes: Vote[];
 
   protected userVote: number;
-  length: number;
 
   setUserVote(user: User) {
     const index = this.votes?.findIndex((v) => v.username === user.username);

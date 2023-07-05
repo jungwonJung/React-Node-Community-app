@@ -42,6 +42,7 @@ const Register = () => {
           <h1 className="mb-2 text-lg font-medium uppercase">SIGN UP</h1>
           <form onSubmit={handleSubmit}>
             <InputGroup
+              type="email"
               placeholder="Email"
               value={email}
               setValue={setEmail}

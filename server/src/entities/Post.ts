@@ -47,14 +47,14 @@ export default class Post extends BaseEntity {
 
   @Exclude()
   @OneToMany(() => Comment, (comment) => comment.post)
-  comments: Comment;
+  comments: Comment[];
 
   @Exclude()
   @OneToMany(() => Vote, (vote) => vote.post)
   votes: Vote[];
 
   @Expose() get url(): string {
-    return `r/${this.subName}/${this.identifier}/${this.slug}`;
+    return `/r/${this.subName}/${this.identifier}/${this.slug}`;
   }
 
   @Expose() get commentCount(): number {
