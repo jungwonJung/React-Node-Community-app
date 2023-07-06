@@ -86,7 +86,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     if (!cookie) throw new Error("Missing Auth Token Cookie");
 
     // if have cookie with this cookie sent to backend side and validate
-    await Axios.get("/auth/me", { headers: { cookie } });
+    await Axios.get(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/api/auth/me`, {
+      headers: { cookie },
+    });
 
     return { props: {} };
   } catch (error) {

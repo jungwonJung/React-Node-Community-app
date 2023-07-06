@@ -1,4 +1,6 @@
-.env
+# .env.development
+# .env.production
+
 .idea/
 .vscode/
 node_modules/
