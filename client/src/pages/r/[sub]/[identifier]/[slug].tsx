@@ -149,7 +149,7 @@ const PostPage = () => {
               </div>
               <div>
                 {/* Add comment container */}
-                <div className=" pr-6 mb-4">
+                <div className="pr-6 mb-4 pl-9 pb-4">
                   {authenticated ? (
                     <div>
                       <p className="mb-1 text-xs">
@@ -195,7 +195,7 @@ const PostPage = () => {
               {/* Comments List Container */}
               {comments?.map((comment) => (
                 <div className="flex" key={comment.identifier}>
-                  <div className="flex-shring-0 w-10 py-2 text-center rounded-l">
+                  <div className="flex-shrink-0 w-10 py-2 text-center rounded-l">
                     <div
                       className="w-6 mx-auto text-gray-400 rounded cursor-pointer hover:bg-gray-300 hover:text-red-500"
                       onClick={() => vote(1, comment)}

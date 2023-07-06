@@ -82,7 +82,7 @@ const Home: NextPage = () => {
       </div>
       {/* sidebar sub-community list */}
       <div className="hidden w-4/12 ml-3 md:block">
-        <div className="bg-white border rounded mt-4">
+        <div className="bg-white border rounded">
           <div className="p-4 border-b">
             <p className="text-lg font-semibold text-center">Top Community</p>
           </div>

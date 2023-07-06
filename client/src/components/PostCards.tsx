@@ -91,40 +91,41 @@ const PostCards = ({
       </div>
       {/* posts data container */}
       <div className="w-full p-2">
-        {!isInSubPage && (
-          <div className="flex items-center">
-            <Link href={`/r/${subName}`}>
-              {sub && (
-                <Image
-                  src={sub.imageUrl}
-                  alt="subImage"
-                  className="w-6 h-6 mr-1 rounded-full cursor-pointer"
-                  width={12}
-                  height={12}
-                />
-              )}
-            </Link>
-            <Link href={`/r/${subName}`} legacyBehavior>
-              <a className="ml-2 text-xs font-bold cursor-pointer hover:underline">
-                {subName}
-              </a>
-            </Link>
-            <span className="mx-1 text-xs text-gray-400">•</span>
-          </div>
-        )}
+        <div className="flex items-center">
+          {!isInSubPage && (
+            <div className="flex items-center">
+              <Link href={`/r/${subName}`}>
+                {sub && (
+                  <Image
+                    src={sub.imageUrl}
+                    alt="subImage"
+                    className="w-6 h-6 mr-1 rounded-full cursor-pointer"
+                    width={12}
+                    height={12}
+                  />
+                )}
+              </Link>
+              <Link href={`/r/${subName}`} legacyBehavior>
+                <a className="ml-2 text-xs font-bold cursor-pointer hover:underline">
+                  {subName}
+                </a>
+              </Link>
+              <span className="mx-1 text-xs text-gray-400">•</span>
+            </div>
+          )}
 
-        <p className="text-xs text-gray-400">
-          Posted by
-          <Link href={`/r/${username}`} legacyBehavior>
-            <a className="mx-1 hover:underline">{username}</a>
-          </Link>
-          <Link href={url}>
-            <span className="mx-1 hover:underline">
-              {dayjs(createdAt).format("YYYY-DD-MM HH:mm")}
-            </span>
-          </Link>
-        </p>
-
+          <p className="text-xs text-gray-400">
+            Posted by
+            <Link href={`/u/${username}`} legacyBehavior>
+              <a className="mx-1 hover:underline">{username}</a>
+            </Link>
+            <Link href={url}>
+              <span className="mx-1 hover:underline">
+                {dayjs(createdAt).format("YYYY-DD-MM HH:mm")}
+              </span>
+            </Link>
+          </p>
+        </div>
         <Link href={url} legacyBehavior>
           <a className="my-1 text-lg font-medium">{title}</a>
         </Link>
