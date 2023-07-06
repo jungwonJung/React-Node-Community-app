@@ -7,13 +7,13 @@ This repository contains a community application built using React, Node.js, and
 
 ## Technologies Used
 
-- Next.js: React framework for server-side rendering and efficient development.
-- Node.js: JavaScript runtime for building scalable server-side applications.
-- TypeScript: Statically typed superset of JavaScript for enhanced productivity.
-- Docker: Containerization platform for managing the PostgreSQL database.
-- PostgreSQL: Open-source relational database management system for data storage.
-- Tailwind CSS: Utility-first CSS framework for rapid UI development.
-- AWS EC2: Deployment on Amazon EC2 for accessibility and scalability.
+- Next.js
+- Node.js
+- TypeScript
+- Docker
+- PostgreSQL
+- Tailwind CSS
+- AWS EC2
 
 ## Functionality Description
 
