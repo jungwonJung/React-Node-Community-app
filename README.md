@@ -16,6 +16,8 @@ Technologies Used
 -   Tailwind CSS: Tailwind CSS is a utility-first CSS framework that helps with rapid UI development.
 -   AWS EC2: The application is deployed on an Amazon EC2 instance for accessibility and scalability.
 
+Functionality Description
+-----------------
 
 -   User SingUp: Users can create new accounts to join the community.
 -   SignIn: Registered users can log in to access their accounts and perform various actions.
