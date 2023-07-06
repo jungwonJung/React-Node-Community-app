@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import InputGroup from "../../components/InputGroup";
+import InputGroup from "../../components/inputGroup";
 import React, { FormEvent, useState } from "react";
 import Axios from "axios";
 import { GetServerSideProps } from "next";

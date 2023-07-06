@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import InputGroup from "../components/InputGroup";
+import InputGroup from "../components/inputGroup";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";

@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import InputGroup from "../components/InputGroup";
+import InputGroup from "../components/inputGroup";
 import axios from "axios";
 import { useAuthState } from "../context/auth";
 
