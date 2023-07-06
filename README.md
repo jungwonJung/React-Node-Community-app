@@ -7,26 +7,26 @@ This repository contains a community application built using React, Node.js, and
 
 ## Technologies Used
 
-- Next.js
-- Node.js
-- TypeScript
-- Docker
-- PostgreSQL
-- Tailwind CSS
-- AWS EC2
+- **Next.js**
+- **Node.js**
+- **TypeScript**
+- **Docker**
+- **PostgreSQL**
+- **Tailwind CSS**
+- **AWS EC2**
 
 ## Functionality Description
 
 The React-Node Community App offers the following functionalities:
 
-- User SignUp: Allows users to create new accounts and join the community.
-- SignIn: Enables registered users to log in and access their accounts.
-- SignOut: Allows logged-in users to end their current session.
-- Community Creation: Users can create new communities for topic-based discussions.
-- Post Creation: Users can create posts within communities to share content and start discussions.
-- Comment Writing: Users can write comments on posts to express thoughts and engage in conversations.
-- Voting: Users can vote on posts and comments to indicate approval or disapproval.
-- Image Upload: Users can upload images to include in their posts or comments.
+- **User SignUp**: Allows users to create new accounts and join the community.
+- **SignIn**: Enables registered users to log in and access their accounts.
+- **SignOut**: Allows logged-in users to end their current session.
+- **Community Creation**: Users can create new communities for topic-based discussions.
+- **Post Creation**: Users can create posts within communities to share content and start discussions.
+- **Comment Writing**: Users can write comments on posts to express thoughts and engage in conversations.
+- **Voting**: Users can vote on posts and comments to indicate approval or disapproval.
+- **Image Upload**: Users can upload images to include in their posts or comments.
 
 
 Getting Started
