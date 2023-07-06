@@ -35,22 +35,16 @@ To get started with the React-Node Community App, follow the steps below:
 
 1.  Clone the repository:
 
-    bashCopy code
-
-    `git clone https://github.com/jungwonJung/React-Node-Community-app.git`
+   ```git clone https://github.com/jungwonJung/React-Node-Community-app.git```
 
 2.  Install the dependencies:
 
-    bashCopy code
-
-    `cd React-Node-Community-app
-    npm install`
+    ```cd React-Node-Community-app
+    npm install```
 
 3.  Start the development server:
 
-    bashCopy code
-
-    `npm run dev`
+    ```npm run dev```
 
     The application will be accessible at `http://localhost:3000`.
 
