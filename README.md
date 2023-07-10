@@ -37,6 +37,7 @@ considering the limitations of the AWS EC2 Free Tier.
 In the future, I plan to find a more cost-effective and suitable cloud service to redeploy.
 
 
+
 2.I plan to add functionality for modifying or deleting data in the future
 
 
