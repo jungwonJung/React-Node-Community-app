@@ -29,6 +29,18 @@ The React-Node Community App offers the following functionalities:
 - **Image Upload**: Users can upload images to include in their posts or comments.
 
 
+## Technologies Issue(So far)
+
+
+1. I think it is not possible to install Docker and deploy both the client and server within a single EC2 instance while using PM2 for deployment, 
+considering the limitations of the AWS EC2 Free Tier.
+In the future, I plan to find a more cost-effective and suitable cloud service to redeploy.
+
+
+2.I plan to add functionality for modifying or deleting data in the future
+
+
+
 Getting Started
 ---------------
 
